@@ -11,7 +11,7 @@ import telran.spring.calculator.dto.OperationData;
 
 @Service
 public class DatesBetweenOperation implements Operation {
-	@Value("${app,calculator.controller.wrong.opertaion.data: BadCastException}")
+	@Value("${app.calculator.controller.wrong.opertaion.data: BadCastException}")
 	String operationNameAndAdditionalDtoFieldsMismatchMessage;
 
 	@Override
