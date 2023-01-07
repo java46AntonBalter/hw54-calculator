@@ -11,7 +11,7 @@ import telran.spring.calculator.dto.*;
 @Service
 public class ArithmeticSimpleOperation implements Operation {
 	private static Map<String, BiFunction<Double, Double, String>> operations;
-	@Value("${app,calculator.controller.wrong.opertaion.data: BadCastException}")
+	@Value("${app.calculator.controller.wrong.opertaion.data: BadCastException}")
 	String operationNameAndAdditionalDtoFieldsMismatchMessage;
 	@Value("${app.calculator.ArithmeticSimpleOperation.wrong.operation: Wrong arithmetic operation}")
 	String wrongArithmeticOperationMessage;
