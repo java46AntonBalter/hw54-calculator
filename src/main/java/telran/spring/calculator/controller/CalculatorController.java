@@ -1,36 +1,35 @@
 package telran.spring.calculator.controller;
 
-import java.util.Map;
-import java.util.Set;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.*;
 
+import org.springframework.web.bind.annotation.*;
+
+
+import telran.spring.calculator.dto.OperationData;
 import telran.spring.calculator.service.Operation;
-import telran.spring.calculator.dto.*;
 
 @RestController
 @RequestMapping("calculator")
 public class CalculatorController {
+	Map<String, Operation> operationServices;
 
-	Map<String, Operation> operations;
-
-	public CalculatorController(Map<String, Operation> operations) {
-		this.operations = operations;
+	public CalculatorController(Map<String, Operation> operationServices) {
+		this.operationServices = operationServices;
 	}
-
 	@PostMapping
-	String performOperation(@RequestBody OperationData operationData) {
-		Operation operation = operations.get(operationData.operationName);
-		return operation != null ? operation.execute(operationData) : "Wrong name " + operationData.operationName;
+	String getOperationResult(@RequestBody OperationData data) {
+		Operation operationService = operationServices.get(data.operationName);
+		String res = operationService != null ? operationService.execute(data) : 
+			String.format("Wrong operation name, should be one from %s",
+					operationServices.keySet());
+		return res;
+			
 	}
-
 	@GetMapping
-	Set<String> getTypes() {
-		return operations.keySet();
+	Set<String> getAllOperationNames() {
+		return operationServices.keySet();
 	}
+	
 
 }
