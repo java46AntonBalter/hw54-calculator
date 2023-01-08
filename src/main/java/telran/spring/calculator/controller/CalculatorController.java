@@ -1,7 +1,9 @@
 package telran.spring.calculator.controller;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import telran.spring.calculator.service.Operation;
 @RestController
 @RequestMapping("calculator")
 public class CalculatorController {
+	@Autowired
 	Map<String, Operation> operationServices;
 	List<Operation> operationsList;
 	@Value("${app.calculator.wrong.operation.name:Wrong Name}")
@@ -21,7 +24,6 @@ public class CalculatorController {
 
 	public CalculatorController(List<Operation> operationsList) {
 		this.operationsList = operationsList;
-		this.operationServices = new HashMap<String, Operation>();
 	}
 
 	@PostMapping
@@ -41,7 +43,8 @@ public class CalculatorController {
 
 	@PostConstruct
 	void getOperationsMap() {
-		operationsList.stream().forEach(o -> operationServices.put(o.getClass().getSimpleName(), o));
+		operationServices = operationsList.stream()
+				.collect(Collectors.toMap(o -> o.getClass().getSimpleName(), o -> o));
 
 	}
 
