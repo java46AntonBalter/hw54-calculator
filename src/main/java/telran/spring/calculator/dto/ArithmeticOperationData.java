@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class ArithmeticOperationData extends OperationData {
 	@NotNull
-	public double operand1;
+	public Double operand1;
 	@NotNull
-	public double operand2;
+	public Double operand2;
 }
