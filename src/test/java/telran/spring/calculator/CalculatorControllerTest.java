@@ -52,7 +52,8 @@ class CalculatorControllerTest {
 	void getAllOperationNamesTest() throws Exception {
 		MvcResult result = mockMvc.perform(get("http://localhost:8080/calculator")).andExpect(status().isOk())
 				.andReturn();
-		String res = result.toString();
+		String res = result.getResponse().getContentAsString();
+
 	}
 
 }
