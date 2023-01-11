@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -49,7 +50,9 @@ class CalculatorControllerTest {
 
 	@Test
 	void getAllOperationNamesTest() throws Exception {
-		mockMvc.perform(get("http://localhost:8080/calculator")).andExpect(status().isOk());
+		MvcResult result = mockMvc.perform(get("http://localhost:8080/calculator")).andExpect(status().isOk())
+				.andReturn();
+		String res = result.toString();
 	}
 
 }

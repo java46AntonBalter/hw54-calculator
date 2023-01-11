@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 import telran.spring.calculator.dto.*;
 import telran.spring.calculator.service.*;
 
 @SpringBootTest
+@TestPropertySource(locations = "classpath:application.properties")
 class OperationsTests {
 	@Autowired
 	ArithmeticSimpleOperation arithmeticSimpleOperation;
